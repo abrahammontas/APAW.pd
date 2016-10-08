@@ -19,9 +19,4 @@ public class Square extends Figure {
         return 4;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 }

@@ -21,9 +21,4 @@ public class Triangle extends Figure {
         return 3;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
-    }
-
 }
