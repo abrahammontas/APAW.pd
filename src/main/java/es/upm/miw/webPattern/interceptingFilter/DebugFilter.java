@@ -7,9 +7,12 @@ public class DebugFilter extends Filter {
 
     @Override
     public void doFilter(HttpRequest request, HttpResponse response, FilterChain filterChain) {
-        System.out.println("Debuging pre-process...");
+    	//PRE-PROCESS
+        System.out.println("- Debuging pre-process...");
         filterChain.doFilter(request, response);
+        
+    	//POST-PROCESS
         response.getHeaderParams().put("debug", "DebugFilter");
-        System.out.println("Debuging post-process...");
+        System.out.println("- Debuging post-process...");
     }
 }

@@ -11,14 +11,14 @@ public class VotingMain {
     }
 
     public void voting(){
-        HttpRequest request = new HttpRequest("LocalHost", "Voting", HttpMethod.GET);
+        HttpRequest request = new HttpRequest("Voting", HttpMethod.GET);
         System.out.println(request.toString() + "\n");
         
         new Client().send(request);
     }
     
     public void votingVoteTheme(String themeName, int value) {
-        HttpRequest request = new HttpRequest("LocalHost", "Voting", HttpMethod.POST);
+        HttpRequest request = new HttpRequest( "Voting", HttpMethod.POST);
         request.addQueryParam("action", "voteTheme");
         request.addQueryParam("themeName", themeName);
         request.addQueryParam("value", "" + value);
@@ -28,14 +28,14 @@ public class VotingMain {
     }
 
     public void themeManager(){
-        HttpRequest request = new HttpRequest("LocalHost", "ThemeManager", HttpMethod.GET);
+        HttpRequest request = new HttpRequest("ThemeManager", HttpMethod.GET);
         System.out.println(request.toString() + "\n");
         
         new Client().send(request);
     }
     
     public void themeManagerCreateTheme(String themeName){
-        HttpRequest request = new HttpRequest("LocalHost", "ThemeManager", HttpMethod.POST);
+        HttpRequest request = new HttpRequest("ThemeManager", HttpMethod.POST);
         request.addQueryParam("action", "createTheme");
         request.addQueryParam("themeName", themeName);
         System.out.println(request.toString() + "\n");

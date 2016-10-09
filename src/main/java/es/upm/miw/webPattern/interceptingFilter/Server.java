@@ -6,10 +6,12 @@ import es.upm.miw.web.http.HttpStatus;
 
 public class Server {
 
-    public HttpResponse send(HttpRequest request) {
+    public HttpResponse request(HttpRequest request) {
         HttpResponse response = new HttpResponse();
-        new FilterManager().doFilter(request, response);
         response.setStatus(HttpStatus.OK);
+        
+        new FilterManager().execute(request, response);
+        
         return response;
     }
 
