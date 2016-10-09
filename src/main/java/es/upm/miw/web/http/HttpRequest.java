@@ -25,6 +25,15 @@ public class HttpRequest extends HttpBase {
 		return path;
 	}
 
+	public String pathRoot(int level) {
+		String[] paths = path.split("/");
+		String result = "";
+		for (int i = 0; i < level; i++) {
+			result += paths[i];
+		}
+		return result;
+	}
+
 	public void setPath(String path) {
 		this.path = path;
 	}
@@ -47,7 +56,7 @@ public class HttpRequest extends HttpBase {
 
 	@Override
 	public String toString() {
-		String result = method.toString() + " " + path + this.queryParams() + " HTTP/1.1\n";
+		String result = method.toString() + " /" + path + this.queryParams() + " HTTP/1.1\n";
 		result += super.toString();
 		return result;
 	}

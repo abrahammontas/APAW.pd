@@ -1,4 +1,4 @@
-package es.upm.miw.webPattern.frontController;
+package es.upm.miw.webPattern.frontControllerWeb;
 
 public class BusinessService {
 

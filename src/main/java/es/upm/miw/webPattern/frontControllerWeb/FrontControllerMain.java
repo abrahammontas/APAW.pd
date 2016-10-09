@@ -1,4 +1,4 @@
-package es.upm.miw.webPattern.frontController;
+package es.upm.miw.webPattern.frontControllerWeb;
 
 import es.upm.miw.web.http.HttpMethod;
 import es.upm.miw.web.http.HttpRequest;
@@ -8,7 +8,7 @@ public class FrontControllerMain {
     public void helper1() {
         HttpRequest request = new HttpRequest("Helper1", HttpMethod.GET);
         System.out.println(request.toString() + "\n");
-        new Client().send(request);
+        new Server().execute(request);
     }
 
     public void helper1Action1(String param1) {
@@ -16,7 +16,7 @@ public class FrontControllerMain {
         request.addQueryParam("action", "action1");
         request.addQueryParam("param1", param1);
         System.out.println(request.toString() + "\n");
-        new Client().send(request);
+        new Server().execute(request);
     }
 
     public void helper1Action2(String param2) {
@@ -24,13 +24,13 @@ public class FrontControllerMain {
         request.addQueryParam("action", "action2");
         request.addQueryParam("param2", param2);
         System.out.println(request.toString() + "\n");
-        new Client().send(request);
+        new Server().execute(request);
     }
 
     public void helper2() {
         HttpRequest request = new HttpRequest("Helper2", HttpMethod.GET);
         System.out.println(request.toString() + "\n");
-        new Client().send(request);
+        new Server().execute(request);
     }
 
     public void helper2Action1(String param1) {
@@ -38,13 +38,13 @@ public class FrontControllerMain {
         request.addQueryParam("action", "action1");
         request.addQueryParam("param1", param1);
         System.out.println(request.toString() + "\n");
-        new Client().send(request);
+        new Server().execute(request);
     }
 
     public void helper3() {
         HttpRequest request = new HttpRequest("Helper3", HttpMethod.GET);
         System.out.println(request.toString() + "\n");
-        new Server().send(request);
+        new Server().execute(request);
     }
 
     public static void main(String[] args) {

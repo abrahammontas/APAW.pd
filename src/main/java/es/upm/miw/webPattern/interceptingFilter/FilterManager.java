@@ -10,10 +10,15 @@ public class FilterManager {
 		FilterChain filterChain = new FilterChain(new Target());
 
 		// Se procesa el request y se establece los filtros
+		// **/**
 		filterChain.addFilter(new AuthenticationFilter());
-		if ("/public".equals(request.getPath())) {
-			filterChain.addFilter(new DebugFilter());
+		// **/public/**
+		if ("public".equals(request.pathRoot(1))) {
 			filterChain.addFilter(new TimeFilter());
+		}
+		// **/public/debug
+		if ("public/debug".equals(request.getPath())) {
+			filterChain.addFilter(new DebugFilter());
 		}
 
 		// Se pasa el control
