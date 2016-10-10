@@ -6,15 +6,14 @@ import miw.apiArchitecture.exceptions.NotFoundThemeIdException;
 import miw.apiArchitecture.wrappers.OverageWrapper;
 import miw.apiArchitecture.wrappers.ThemeListWrapper;
 
-// **/themes
 public class ThemeResource {
 
-	// GET
+	// GET **/themes
 	public ThemeListWrapper themeList() {
 		return new ThemeController().themeList();
 	}
 
-	// POST **?themeName=*
+	// POST **/themes?themeName=*
 	public void createTheme(String themeName) throws InvalidThemeFieldException {
 		this.validateField(themeName);
 		new ThemeController().createTheme(themeName);
@@ -26,13 +25,14 @@ public class ThemeResource {
 		}
 	}
 
-	// GET **/{id}/overage
+	// GET **themes/{id}/overage
 	public OverageWrapper themeOverage(int themeId) throws NotFoundThemeIdException {
 		OverageWrapper overageWrapper = new ThemeController().themeOverage(themeId);
 		if (overageWrapper == null) {
 			throw new NotFoundThemeIdException("" + themeId);
+		} else {
+			return overageWrapper;
 		}
-		return overageWrapper;
 	}
 
 }

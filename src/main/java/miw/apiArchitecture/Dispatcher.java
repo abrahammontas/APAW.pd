@@ -13,19 +13,26 @@ public class Dispatcher {
 	private ThemeResource themeResource = new ThemeResource();
 	private VoteResource voteResource = new VoteResource();
 
+	private void responseError(HttpResponse response, Exception e) {
+		response.setBody("{\"error\":\"" + e + "\"}");
+		response.setStatus(HttpStatus.BAD_REQUEST);
+	}
+
 	public void doGet(HttpRequest request, HttpResponse response) {
 		// **/themes
 		if ("themes".equals(request.getPath())) {
 			// Injectar parámetros...
 			response.setBody(themeResource.themeList().toString());
-			// **/themes/1/overage
+		// **/themes/{id}/overage
 		} else if ("themes".equals(request.paths()[0]) && "overage".equals(request.paths()[2])) {
 			try {
 				response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])));
 			} catch (Exception e) {
 				responseError(response, e);
 			}
-			// **/error
+		// **/votes
+		} else if ("votes".equals(request.getPath())) {
+			response.setBody(voteResource.voteList().toString());
 		} else {
 			responseError(response, new InvalidRequestException(request.getPath()));
 		}
@@ -33,6 +40,7 @@ public class Dispatcher {
 
 	public void doPost(HttpRequest request, HttpResponse response) {
 		switch (request.getPath()) {
+		// POST **/themes?themeName=*
 		case "themes":
 			// Injectar parámetros...
 			try {
@@ -41,8 +49,8 @@ public class Dispatcher {
 				this.responseError(response, e);
 			}
 			break;
+		// POST votes?themeId=*&vote=*
 		case "votes":
-			// POST votes?themeId=*&vote=*
 			String themeId = request.getParams().get("themeId");
 			String vote = request.getParams().get("vote");
 			try {
@@ -71,11 +79,6 @@ public class Dispatcher {
 			responseError(response, new InvalidRequestException(request.getPath()));
 			break;
 		}
-	}
-
-	private void responseError(HttpResponse response, Exception e) {
-		response.setBody("{\"error\":\"" + e + "\"}");
-		response.setStatus(HttpStatus.BAD_REQUEST);
 	}
 
 }

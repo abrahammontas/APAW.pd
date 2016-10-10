@@ -1,6 +1,5 @@
 package miw.apiArchitecture.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import miw.apiArchitecture.daos.DaoFactory;
@@ -13,12 +12,10 @@ public class ThemeController {
 
 	public ThemeListWrapper themeList() {
 		List<Theme> themeList = DaoFactory.getFactory().getThemeDao().findAll();
-		List<ThemeWrapper> themeWrapperList = new ArrayList<>();
-		for (Theme theme : themeList) {
-			themeWrapperList.add(new ThemeWrapper(theme.getId(), theme.getName()));
-		}
 		ThemeListWrapper themeListWrapper = new ThemeListWrapper();
-		themeListWrapper.setThemeList(themeWrapperList);
+		for (Theme theme : themeList) {
+			themeListWrapper.addThemeWrapper(new ThemeWrapper(theme.getId(), theme.getName()));
+		}
 		return themeListWrapper;
 	}
 
@@ -27,12 +24,15 @@ public class ThemeController {
 	}
 
 	public OverageWrapper themeOverage(int themeId) {
-		List<Integer> voteValues= DaoFactory.getFactory().getVoteDao().findByThemeId(themeId);
-		double total=0;
-		for (Integer value : voteValues) {
-			total+=value;
+		if (DaoFactory.getFactory().getThemeDao().read(themeId) == null) {
+			return null;
 		}
-		return new OverageWrapper(total/voteValues.size());
+		List<Integer> voteValues = DaoFactory.getFactory().getVoteDao().findByThemeId(themeId);
+		double total = 0;
+		for (Integer value : voteValues) {
+			total += value;
+		}
+		return new OverageWrapper(total / voteValues.size());
 	}
 
 }

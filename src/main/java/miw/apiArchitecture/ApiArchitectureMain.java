@@ -18,6 +18,56 @@ public class ApiArchitectureMain {
 		IO.getIO().println("POST **/themes?themeName=*");
 		IO.getIO().println("GET **/themes/{id}/overage");
 		IO.getIO().println("POST **/votes?themeId=*&vote=*");
+		IO.getIO().println("GET **/votes");
+	}
+
+	public void demo() {
+		request.setMethod(HttpMethod.POST);
+		request.setPath("themes");
+		request.addQueryParam("themeName", "uno");
+		this.request();
+		request.clearQueryParams();
+		request.addQueryParam("themeName", "dos");
+		this.request();
+		request.setPath("votes");
+		request.clearQueryParams();
+		request.addQueryParam("themeId", "1");
+		request.addQueryParam("vote", "4");
+		this.request();
+		request.clearQueryParams();
+		request.addQueryParam("themeId", "1");
+		request.addQueryParam("vote", "5");
+		this.request();
+		request.clearQueryParams();
+		request.addQueryParam("themeId", "2");
+		request.addQueryParam("vote", "5");
+		this.request();
+		request.clearQueryParams();
+		request.addQueryParam("themeId", "2");
+		request.addQueryParam("vote", "6");
+		this.request();
+		request.setMethod(HttpMethod.GET);
+		request.setPath("votes");
+		request.clearQueryParams();
+		this.request();
+		request.setPath("themes");
+		this.request();
+		request.setPath("themes/1/overage");
+		this.request();
+		request.setPath("themes/2/overage");
+		this.request();
+		//Exceptions
+		request.setPath("noValid");
+		this.request();
+		request.setPath("themes/x/overage");
+		this.request();
+		request.setPath("themes/99/overage");
+		this.request();
+		request.setMethod(HttpMethod.POST);
+		request.setPath("votes");
+		request.addQueryParam("themeId", "99");
+		request.addQueryParam("vote", "4");
+		this.request();
 	}
 
 	public void httpMethod() {
@@ -51,7 +101,7 @@ public class ApiArchitectureMain {
 		IO.getIO().println(request.toString());
 		HttpResponse response = server.request(request);
 		IO.getIO().println(response);
-		IO.getIO().println("-----------------------------ooo------------------------------");
+		IO.getIO().println("---------------------------------------ooo----------------------------------------");
 	}
 
 	public static void main(String[] args) {

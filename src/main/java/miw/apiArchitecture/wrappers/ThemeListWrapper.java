@@ -1,17 +1,24 @@
 package miw.apiArchitecture.wrappers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ThemeListWrapper {
 	List<ThemeWrapper> themeList;
 
+	
+	public ThemeListWrapper() {
+		themeList = new ArrayList<>();
+	}
+
 	public List<ThemeWrapper> getThemeList() {
 		return themeList;
 	}
 
-	public void setThemeList(List<ThemeWrapper> themeList) {
-		this.themeList = themeList;
+	public void addThemeWrapper(ThemeWrapper themeWrapper){
+		themeList.add(themeWrapper);
 	}
+	
 
 	@Override
 	public String toString() {
