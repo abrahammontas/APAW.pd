@@ -15,7 +15,7 @@ public class ThemeListWrapper {
 
 	@Override
 	public String toString() {
-		String result = "{\"themeList\":[";
+		String result = "{\"themeList\":[ ";
 		for (ThemeWrapper themeWrapper : themeList) {
 			result += themeWrapper.toString() + ",";
 		}

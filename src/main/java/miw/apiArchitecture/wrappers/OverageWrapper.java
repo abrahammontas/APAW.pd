@@ -3,6 +3,10 @@ package miw.apiArchitecture.wrappers;
 public class OverageWrapper {
 	private double overage;
 
+	public OverageWrapper(double overage) {
+		this.setOverage(overage);
+	}
+
 	public double getOverage() {
 		return overage;
 	}

@@ -11,8 +11,7 @@ public class Vote {
     public Vote() {
     }
 
-    public Vote(int id, int vote, Theme theme) {
-        this.id = id;
+    public Vote(int vote, Theme theme) {
         this.vote = vote;
         this.theme = theme;
     }

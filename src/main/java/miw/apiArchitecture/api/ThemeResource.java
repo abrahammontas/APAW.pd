@@ -9,9 +9,9 @@ import miw.apiArchitecture.wrappers.ThemeListWrapper;
 // **/themes
 public class ThemeResource {
 
-	// GET 
-	public ThemeListWrapper themeList(String[] fields) {
-			return new ThemeController().themeList();
+	// GET
+	public ThemeListWrapper themeList() {
+		return new ThemeController().themeList();
 	}
 
 	// POST **?themeName=*
@@ -25,12 +25,12 @@ public class ThemeResource {
 			throw new InvalidThemeFieldException(field);
 		}
 	}
-	
+
 	// GET **/{id}/overage
-	public OverageWrapper themeOverage(int themeId) throws NotFoundThemeIdException{
+	public OverageWrapper themeOverage(int themeId) throws NotFoundThemeIdException {
 		OverageWrapper overageWrapper = new ThemeController().themeOverage(themeId);
-		if(overageWrapper==null){
-			throw new NotFoundThemeIdException(""+themeId);
+		if (overageWrapper == null) {
+			throw new NotFoundThemeIdException("" + themeId);
 		}
 		return overageWrapper;
 	}

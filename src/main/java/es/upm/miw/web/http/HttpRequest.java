@@ -34,6 +34,10 @@ public class HttpRequest extends HttpBase {
 		return result;
 	}
 
+	public String[] paths() {
+		return path.split("/");
+	}
+
 	public void setPath(String path) {
 		this.path = path;
 	}
@@ -54,11 +58,13 @@ public class HttpRequest extends HttpBase {
 		queryParams.put(key, value);
 	}
 
+	public void clearQueryParams() {
+		queryParams.clear();
+	}
+
 	@Override
 	public String toString() {
-		String result = method.toString() + " /" + path + this.queryParams() + " HTTP/1.1\n";
-		result += super.toString();
-		return result;
+		return method.toString() + " /" + path + this.queryParams() + "   " + super.toString();
 	}
 
 	private String queryParams() {

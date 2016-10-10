@@ -27,8 +27,12 @@ public class ThemeController {
 	}
 
 	public OverageWrapper themeOverage(int themeId) {
-		// TODO Auto-generated method stub
-		return null;
+		List<Integer> voteValues= DaoFactory.getFactory().getVoteDao().findByThemeId(themeId);
+		double total=0;
+		for (Integer value : voteValues) {
+			total+=value;
+		}
+		return new OverageWrapper(total/voteValues.size());
 	}
 
 }
