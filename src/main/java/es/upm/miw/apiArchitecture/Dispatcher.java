@@ -23,14 +23,14 @@ public class Dispatcher {
 		if ("themes".equals(request.getPath())) {
 			// Injectar parámetros...
 			response.setBody(themeResource.themeList().toString());
-		// **/themes/{id}/overage
+			// **/themes/{id}/overage
 		} else if ("themes".equals(request.paths()[0]) && "overage".equals(request.paths()[2])) {
 			try {
 				response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])));
 			} catch (Exception e) {
 				responseError(response, e);
 			}
-		// **/votes
+			// **/votes
 		} else if ("votes".equals(request.getPath())) {
 			response.setBody(voteResource.voteList().toString());
 		} else {
@@ -45,6 +45,7 @@ public class Dispatcher {
 			// Injectar parámetros...
 			try {
 				themeResource.createTheme(request.getParams().get("themeName"));
+				response.setStatus(HttpStatus.CREATED);
 			} catch (InvalidThemeFieldException e) {
 				this.responseError(response, e);
 			}
@@ -55,6 +56,7 @@ public class Dispatcher {
 			String vote = request.getParams().get("vote");
 			try {
 				voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
+				response.setStatus(HttpStatus.CREATED);
 			} catch (Exception e) {
 				responseError(response, e);
 			}
