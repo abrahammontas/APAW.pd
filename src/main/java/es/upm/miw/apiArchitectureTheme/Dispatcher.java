@@ -26,7 +26,7 @@ public class Dispatcher {
 			// **/themes/{id}/overage
 		} else if ("themes".equals(request.paths()[0]) && "overage".equals(request.paths()[2])) {
 			try {
-				response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])));
+				response.setBody(themeResource.themeOverage(Integer.valueOf(request.paths()[1])).toString());
 			} catch (Exception e) {
 				responseError(response, e);
 			}
@@ -40,20 +40,20 @@ public class Dispatcher {
 
 	public void doPost(HttpRequest request, HttpResponse response) {
 		switch (request.getPath()) {
-		// POST **/themes?themeName=*
+		// POST **/themes       body=themeName
 		case "themes":
 			// Injectar parámetros...
 			try {
-				themeResource.createTheme(request.getParams().get("themeName"));
+				themeResource.createTheme(request.getBody());
 				response.setStatus(HttpStatus.CREATED);
 			} catch (InvalidThemeFieldException e) {
 				this.responseError(response, e);
 			}
 			break;
-		// POST votes?themeId=*&vote=*
+		// POST votes   body=themeId:vote
 		case "votes":
-			String themeId = request.getParams().get("themeId");
-			String vote = request.getParams().get("vote");
+			String themeId = request.getBody().split(":")[0];
+			String vote = request.getBody().split(":")[1];
 			try {
 				voteResource.createVote(Integer.valueOf(themeId), Integer.valueOf(vote));
 				response.setStatus(HttpStatus.CREATED);

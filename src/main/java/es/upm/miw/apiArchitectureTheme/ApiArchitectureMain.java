@@ -15,36 +15,27 @@ public class ApiArchitectureMain {
 
 	public void help() {
 		IO.getIO().println("GET **/themes");
-		IO.getIO().println("POST **/themes?themeName=*");
+		IO.getIO().println("POST **/themes   body=themeName");
 		IO.getIO().println("GET **/themes/{id}/overage");
-		IO.getIO().println("POST **/votes?themeId=*&vote=*");
+		IO.getIO().println("POST **/votes   body=themeId:vote");
 		IO.getIO().println("GET **/votes");
 	}
 
 	public void demo() {
 		request.setMethod(HttpMethod.POST);
 		request.setPath("themes");
-		request.addQueryParam("themeName", "uno");
+		request.setBody("uno");
 		this.request();
-		request.clearQueryParams();
-		request.addQueryParam("themeName", "dos");
+		request.setBody("dos");
 		this.request();
 		request.setPath("votes");
-		request.clearQueryParams();
-		request.addQueryParam("themeId", "1");
-		request.addQueryParam("vote", "4");
+		request.setBody("1:4");
 		this.request();
-		request.clearQueryParams();
-		request.addQueryParam("themeId", "1");
-		request.addQueryParam("vote", "5");
+		request.setBody("1:5");
 		this.request();
-		request.clearQueryParams();
-		request.addQueryParam("themeId", "2");
-		request.addQueryParam("vote", "5");
+		request.setBody("2:5");
 		this.request();
-		request.clearQueryParams();
-		request.addQueryParam("themeId", "2");
-		request.addQueryParam("vote", "6");
+		request.setBody("2:6");
 		this.request();
 		request.setMethod(HttpMethod.GET);
 		request.setPath("votes");
@@ -65,8 +56,7 @@ public class ApiArchitectureMain {
 		this.request();
 		request.setMethod(HttpMethod.POST);
 		request.setPath("votes");
-		request.addQueryParam("themeId", "99");
-		request.addQueryParam("vote", "4");
+		request.setBody("99:4");
 		this.request();
 	}
 

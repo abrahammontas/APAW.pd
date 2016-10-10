@@ -9,7 +9,7 @@ public class HttpBase {
 
     private Map<String, String> cookies;
 
-    private Object body;
+    private String body;
 
     public HttpBase() {
         cookies = new HashMap<>();
@@ -32,11 +32,11 @@ public class HttpBase {
         headerParams.put(key, value);
     }
 
-    public Object getBody() {
+    public String getBody() {
         return body;
     }
 
-    public void setBody(Object body) {
+    public void setBody(String body) {
         this.body = body;
     }
 
